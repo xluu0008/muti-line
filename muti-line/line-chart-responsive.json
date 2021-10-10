@@ -1,0 +1,138 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "url": "https://raw.githubusercontent.com/xluu0008/homework10/main/homework10/line.csv"
+  },
+  "width": "container",
+  "title": "Total Vaccinations Consumed Over 2021", 
+ 
+  "mark": {
+    "type": "line",
+    
+    "interpolate": "monotone"
+  },
+  "encoding": {
+    "x": {
+      "field": "date",
+      "type": "temporal",
+      "timeUnit": "month",
+      "title": "" 
+    },
+    "y": {
+      "field": "total",
+      "aggregate": "mean",
+      "title": "Vaccinations"
+    
+    },
+  
+    "color": {
+ 
+      "type": "nominal",
+      "field": "country",  
+      "scale": {
+        "domain": [
+          "China",
+          "Brazil",
+          "India",
+          "United States",
+          "United Kingdom"
+         
+        
+        ],
+        "range": [
+          "#EF5350",
+          "#FF5722",
+          "#7E57C2",
+          "#2196F3",
+          "#FFB300"
+        
+         
+        ]
+      },
+      "title": "Country" 
+    },
+    "tooltip": [
+      {"field": "country", "type": "nominal","title": "Country"},
+      {"field": "date", "type": "temporal", "timeUnit": "month", "title": "Month"},
+      {"field": "total","type": "quantitative","title": "Vaccinations","format": ","}
+    ]
+  },
+
+  "layer": [
+    {
+      "selection": {
+        "country_highlight": {
+          "type": "multi",
+          "fields": ["country"],
+          "bind": "legend"
+        }
+      },
+      "mark": "line",
+      "encoding": {
+     
+        "color": {
+ 
+          "type": "nominal",
+          "field": "country",  
+          "scale": {
+            "domain": [
+              "China",
+             
+              "India",
+              "United States",
+               "Brazil",         
+              "United Kingdom"
+           
+            
+            ],
+            "range": [
+              "#EF5350",
+              "#FF5722",
+              "#7E57C2",
+              "#2196F3",
+              "#4CAF50"
+             
+             
+            ]
+          },
+          "title": "Country" 
+        },
+
+        "opacity": {
+          "condition": {"selection": "country_highlight", "value": 0.6},
+          "value": 0.2
+        },
+        "tooltip": [
+          {"field": "country", "type": "nominal","title": "Country"},
+          {"field": "date", "type": "temporal", "timeUnit": "month", "title": "Month"},
+          {"field": "total","type": "quantitative","title": "Vaccinations","format": ","}
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "baseline": "middle",
+        "dx": -12,
+        "fontSize": 11.5,
+        "fontStyle": "italic"
+      },
+      "encoding": {
+        "text": {"field": "country", "type": "nominal"},
+        "color": {"value": "black"},
+        "opacity": {
+         
+          "value": 0
+        },
+        "tooltip": [
+          {"field": "country", "type": "nominal","title": "Country"},
+          {"field": "date", "type": "temporal", "timeUnit": "month", "title": "Month"},
+          {"field": "total","type": "quantitative","title": "Vaccinations","format": ","}
+        ]
+      }
+    }
+  ]
+
+
+}
